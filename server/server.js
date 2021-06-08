@@ -9,4 +9,9 @@ app.use(cors({ extended: false }));
 
 app.use('/toys', controller);
 
+// Error Middleware:
+app.use((error, req, res, next) => {
+    throw new Error(`Error ${error.code || 500}: ${error.message || 'An unknown error occurred'}`);
+})
+
 app.listen(port, () => console.log(`Server started on port ${port}`));
